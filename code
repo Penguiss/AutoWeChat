@@ -1,0 +1,31 @@
+//使用net core非net framework
+using NetAutoGUI;
+using System.Windows.Forms;
+
+Window? win = GUI.Application.FindWindowByTitle("微信");
+if (win == null)//判断微信是否运行中
+{
+    Rectangle? rectWXIcon = GUI.Screenshot.LocateOnScreen("wechaticon.png");
+    if (rectWXIcon == null)
+    {
+        Console.WriteLine("没找到程序图标");
+        return;
+    }
+    GUI.Mouse.Click(rectWXIcon.X, rectWXIcon.Y);
+}
+else
+{
+    win.Activate();
+}
+while (true)
+{
+    
+    win.WaitAndClick("souslianxiren.png", 0.8);//寻找联系人框
+    GUI.Keyboard.Write("宝贝王");//输入联系人
+    Thread.Sleep(1000);
+    GUI.Keyboard.Press(VirtualKeyCode.RETURN);//按回车
+    Thread.Sleep(1000);
+    GUI.Keyboard.Write("现在时间： " + DateTime.Now + ",记得喝水");//发送内容
+    GUI.Keyboard.Press(VirtualKeyCode.RETURN);//发送
+
+}
