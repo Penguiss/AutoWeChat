@@ -17,7 +17,7 @@ else
 {
     win.Activate();
 }
-while (true)
+while (true)//重复
 {
     
     win.WaitAndClick("souslianxiren.png", 0.8);//寻找联系人框
